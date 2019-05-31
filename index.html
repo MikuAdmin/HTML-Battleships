@@ -24,7 +24,7 @@
                 },
                 Japanese: {
                     houshou: "IJN H&omacr;sh&omacr;",
-                    shouhou: "IJN Sho&omacr;h&omacr;",
+                    shouhou: "IJN Sh&omacr;h&omacr;",
                     ryuujou: "IJN Ry&umacr;j&omacr;",
                     akagi: "IJN Akagi",
                     kaga: "IJN Kaga",
@@ -423,42 +423,57 @@
             switch (value) {
                 case "cv":
                     document.getElementById('cv').disabled = true;
-                    document.getElementById("dis-cv").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cv").innerHTML = "Aircraft Carrier: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cv").style.borderRadius = '15px';
+                    document.getElementById("dis-cv").style.backgroundColor = '#ffeeee';
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyCV = value
                     break;
                 case "bb":
                     document.getElementById('bb').disabled = true;
-                    document.getElementById("dis-bb").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bb").innerHTML = "Battleship: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bb").style.borderRadius = '15px';
+                    document.getElementById("dis-bb").style.backgroundColor = '#000';
+                    document.getElementById("dis-bb").style.color = "#FFF";
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyBB = value
                     break;
                 case "bc":
                     document.getElementById('bc').disabled = true;
-                    document.getElementById("dis-bc").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bc").innerHTML = "Battlecruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bc").style.borderRadius = '15px';
+                    document.getElementById("dis-bc").style.backgroundColor = '#3C3C3C';
+                    document.getElementById("dis-bc").style.color = "#FFF";
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyBC = value
                     break;
                 case "ca":
                     document.getElementById('ca').disabled = true;
-                    document.getElementById("dis-ca").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ca").innerHTML = "Heavy Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ca").style.borderRadius = '15px';
+                    document.getElementById("dis-ca").style.backgroundColor = 'azure';
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyCA = value
                     break;
                 case "ss":
                     document.getElementById('ss').disabled = true;
-                    document.getElementById("dis-ss").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ss").innerHTML = "Submarine: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ss").style.borderRadius = '15px';
+                    document.getElementById("dis-ss").style.backgroundColor = '#FF99AA';
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keySS = value
                     break;
                 case "cl":
                     document.getElementById('cl').disabled = true;
-                    document.getElementById("dis-cl").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cl").innerHTML = "Light Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cl").style.borderRadius = '15px';
+                    document.getElementById("dis-cl").style.backgroundColor = '#00009A';
+                    document.getElementById("dis-cl").style.color = "#FFF";
                     var key = document.getElementById("ships").value;
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyCL = value
@@ -468,7 +483,9 @@
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyDD = value
                     document.getElementById('dd').disabled = true;
-                    document.getElementById("dis-dd").innerHTML = document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-dd").innerHTML = "Destroyer: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-dd").style.borderRadius = '15px';
+                    document.getElementById("dis-dd").style.backgroundColor = '#EEEEFF';
                     if(document.getElementById("types").selectedIndex == -1) {
                         document.getElementById("selector").style.display = "hidden"
                         window.setTimeout(() => document.getElementById("selector").remove(), 200)
@@ -508,31 +525,35 @@
                 case 'keyBB':
                     setBB(x, y, orientation);
                     break;
+                case 'keyBC':
+                    setBC(x, y, orientation)
+                    break;
+                case 'keyCA': 
+                    setCA(x, y, orientation);
+                    break;
+                case 'keyCL':
+                    setCL(x, y, orientation)
+                    break;
+                case 'keySS':
+                    setSS(x, y, orientation);
+                    break;
             }
         }
 
-        var cvX, cvY, bbX, bbY;
-
         function setCV(x, y, orientation) {
-            cvX = []
-            cvY = []
             document.getElementById('keyCV').remove()
             if (orientation == 0 && 10 - convert(x) >= 0) {
                 for (let i = convert(x);i < convert(x) + 5;i++) {
                     document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#ffeeee";
                     document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "CV"
-                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Aircraft Carrier - ${fleet.keyCV}`
-                    cvX.push(i)
-                    cvY.push(y)
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Aircraft Carrier - ${fleet.keyCV} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
                 }
             }
             else {
                 for (let i = parseInt(y);i < parseInt(y)+5;i++) {
                     document.getElementById(x + i.toString()).style.backgroundColor = "#ffeeee";
                     document.getElementById(x + i.toString()).innerHTML = "CV"
-                    document.getElementById(x + i.toString()).title = `Aircraft Carrier - ${fleet.keyCV}`
-                    cvX.push(convert(x))
-                    cvY.push(y)
+                    document.getElementById(x + i.toString()).title = `Aircraft Carrier - ${fleet.keyCV} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
         }
@@ -540,35 +561,116 @@
         function setBB(x, y, orientation) {
             if (orientation == 0 && 10 - convert(x) >= 0) {
                 for (let i = convert(x);i < convert(x) + 4;i++) {
-                    for (CVx in cvX) {
-                        for (CVy in cvY) {
-                            if (!(CVy == i && CVx == i)) {
-                                alert(`Already occupied.`)
-                                return;
-                            }
-                        }
-                    }
-                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#ff00ee";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#000";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.color = "#fff"
                     document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "BB"
-                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Battleship - ${fleet.keyBB}`
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Battleship - ${fleet.keyBB} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
                 }
             }
             else {
                 for (let i = parseInt(y);i < parseInt(y)+4;i++) {
-                    for (CVy in cvY) {
-                        for (CVx in cvX) {
-                            if (!(CVy == i && CVx == i)) {
-                                alert(`Already occupied.`)
-                                return;
-                            }
-                        }
-                    }
-                    document.getElementById(x + i.toString()).style.backgroundColor = "#ff00ee";
+                    document.getElementById(x + i.toString()).style.backgroundColor = "#000";
+                    document.getElementById(x + i.toString()).style.color = "#FFF"
                     document.getElementById(x + i.toString()).innerHTML = "BB"
-                    document.getElementById(x + i.toString()).title = `Battleship - ${fleet.keyBB}`
+                    document.getElementById(x + i.toString()).title = `Battleship - ${fleet.keyBB} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
             document.getElementById('keyBB').remove()
+        }
+
+        function setBC(x, y, orientation) {
+            if (orientation == 0 && 10 - convert(x) >= 0) {
+                for (let i = convert(x);i < convert(x) + 4;i++) {
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#3C3C3C";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.color = "#fff"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "BC"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Battlecruiser - ${fleet.keyBC} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
+                }
+            }
+            else {
+                for (let i = parseInt(y);i < parseInt(y)+4;i++) {
+                    document.getElementById(x + i.toString()).style.backgroundColor = "#3C3C3C";
+                    document.getElementById(x + i.toString()).style.color = "#FFF"
+                    document.getElementById(x + i.toString()).innerHTML = "BC"
+                    document.getElementById(x + i.toString()).title = `Battlecruiser - ${fleet.keyBC} | Cell: ${x.toUpperCase()}${i.toString()}`
+                }
+            }
+            document.getElementById('keyBC').remove()
+        }
+
+        function setCA(x, y, orientation) {
+            document.getElementById('keyCA').remove()
+            if (orientation == 0 && 10 - convert(x) >= 0) {
+                for (let i = convert(x);i < convert(x) + 4;i++) {
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "azure";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "CA"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Heavy Cruiser - ${fleet.keyCA} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
+                }
+            }
+            else {
+                for (let i = parseInt(y);i < parseInt(y)+4;i++) {
+                    document.getElementById(x + i.toString()).style.backgroundColor = "azure";
+                    document.getElementById(x + i.toString()).innerHTML = "CA"
+                    document.getElementById(x + i.toString()).title = `Heavy Cruiser - ${fleet.keyCA} | Cell: ${x.toUpperCase()}${i.toString()}`
+                }
+            }
+        }
+
+        function setCL(x, y, orientation) {
+            if (orientation == 0 && 10 - convert(x) >= 0) {
+                for (let i = convert(x);i < convert(x) + 3;i++) {
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#00009A";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.color = "#fff"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "CL"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Light Cruiser - ${fleet.keyCL} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
+                }
+            }
+            else {
+                for (let i = parseInt(y);i < parseInt(y)+3;i++) {
+                    document.getElementById(x + i.toString()).style.backgroundColor = "#00009A";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.color = "#fff"
+                    document.getElementById(x + i.toString()).innerHTML = "CL"
+                    document.getElementById(x + i.toString()).title = `Light Cruiser - ${fleet.keyCL} | Cell: ${x.toUpperCase()}${i.toString()}`
+                }
+            }
+            document.getElementById('keyCL').remove()
+        }
+
+        function setSS(x, y, orientation) {
+            if (orientation == 0 && 10 - convert(x) >= 0) {
+                for (let i = convert(x);i < convert(x) + 3;i++) {
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#FF99AA";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "SS"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Submarine - ${fleet.keySS} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
+                }
+            }
+            else {
+                for (let i = parseInt(y);i < parseInt(y)+3;i++) {
+                    document.getElementById(x + i.toString()).style.backgroundColor = "#FF99AA";
+                    document.getElementById(x + i.toString()).innerHTML = "SS"
+                    document.getElementById(x + i.toString()).title = `Submarine - ${fleet.keySS} | Cell: ${x.toUpperCase()}${i.toString()}`
+                }
+            }
+            document.getElementById('keySS').remove()
+        }
+
+        function setDD(x, y, orientation) {
+            if (orientation == 0 && 10 - convert(x) >= 0) {
+                for (let i = convert(x);i < convert(x) + 3;i++) {
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#EEEEFF";
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "DD"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Destroyer - ${fleet.keyDD} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
+                }
+            }
+            else {
+                for (let i = parseInt(y);i < parseInt(y)+3;i++) {
+                    document.getElementById(x + i.toString()).style.backgroundColor = "#EEEEFF";
+                    document.getElementById(x + i.toString()).innerHTML = "DD"
+                    document.getElementById(x + i.toString()).title = `Destroyer - ${fleet.keyDD} | Cell: ${x.toUpperCase()}${i.toString()}`
+                }
+            }
+            document.getElementById('keyDD').remove()
+            document.getElementById("shp").remove()
         }
 
         /**
@@ -632,19 +734,19 @@
 </head>
 <body onload="document.getElementById('types').selectedIndex = '1';func('cv')">
     <div>
-        <table class="board player">
+        <table class="board player" title="Your board">
             <tr class="header">
                 <td style="background-color: #ccc"></td>
-                <td style="font-family: 'Orbitron';">A</td>
-                <td style="font-family: 'Orbitron';">B</td>
-                <td style="font-family: 'Orbitron';">C</td>
-                <td style="font-family: 'Orbitron';">D</td>
-                <td style="font-family: 'Orbitron';">E</td>
-                <td style="font-family: 'Orbitron';">F</td>
-                <td style="font-family: 'Orbitron';">G</td>
-                <td style="font-family: 'Orbitron';">H</td>
-                <td style="font-family: 'Orbitron';">I</td>
-                <td style="font-family: 'Orbitron';">J</td>
+                <td style="font-family: 'Orbitron';background-color: #888">A</td>
+                <td style="font-family: 'Orbitron';background-color: #888">B</td>
+                <td style="font-family: 'Orbitron';background-color: #888">C</td>
+                <td style="font-family: 'Orbitron';background-color: #888">D</td>
+                <td style="font-family: 'Orbitron';background-color: #888">E</td>
+                <td style="font-family: 'Orbitron';background-color: #888">F</td>
+                <td style="font-family: 'Orbitron';background-color: #888">G</td>
+                <td style="font-family: 'Orbitron';background-color: #888">H</td>
+                <td style="font-family: 'Orbitron';background-color: #888">I</td>
+                <td style="font-family: 'Orbitron';background-color: #888">J</td>
             </tr>
             <tr>
                 <td class="row">1</td>
@@ -801,9 +903,9 @@
                     <optgroup label="Medium">
                         <option value="bb" id="bb">Battleship</option>
                         <option value="bc" id="bc">Battlecruiser</option>
+                        <option value="ca" id="ca">Heavy Cruiser</option>
                     </optgroup>
                     <optgroup label="Small">
-                        <option value="ca" id="ca">Heavy Cruiser</option>
                         <option value="cl" id="cl">Light Cruiser</option>
                         <option value="ss" id="ss">Submarine</option>
                     </optgroup>
@@ -845,7 +947,7 @@
                     <option value="10">10</option>
                 </select>
                 <br>
-                <select name="shp" id="shp"></select>
+                <select disabled name="shp" id="shp"></select>
                 <button onclick="setShip()">Set ship</button>
             </div>
         </div>
@@ -857,16 +959,16 @@
     <table class="board AI">
         <tr class="header">
             <td style="background-color: #ccc"></td>
-            <td style="font-family: 'Orbitron';">A</td>
-            <td style="font-family: 'Orbitron';">B</td>
-            <td style="font-family: 'Orbitron';">C</td>
-            <td style="font-family: 'Orbitron';">D</td>
-            <td style="font-family: 'Orbitron';">E</td>
-            <td style="font-family: 'Orbitron';">F</td>
-            <td style="font-family: 'Orbitron';">G</td>
-            <td style="font-family: 'Orbitron';">H</td>
-            <td style="font-family: 'Orbitron';">I</td>
-            <td style="font-family: 'Orbitron';">J</td>
+            <td style="font-family: 'Orbitron';background-color: #888">A</td>
+            <td style="font-family: 'Orbitron';background-color: #888">B</td>
+            <td style="font-family: 'Orbitron';background-color: #888">C</td>
+            <td style="font-family: 'Orbitron';background-color: #888">D</td>
+            <td style="font-family: 'Orbitron';background-color: #888">E</td>
+            <td style="font-family: 'Orbitron';background-color: #888">F</td>
+            <td style="font-family: 'Orbitron';background-color: #888">G</td>
+            <td style="font-family: 'Orbitron';background-color: #888">H</td>
+            <td style="font-family: 'Orbitron';background-color: #888">I</td>
+            <td style="font-family: 'Orbitron';background-color: #888">J</td>
         </tr>
         <tr>
             <td class="row">1</td>
