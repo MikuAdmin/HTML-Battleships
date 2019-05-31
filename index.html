@@ -521,6 +521,7 @@
                 for (let i = convert(x);i < convert(x) + 5;i++) {
                     document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#ffeeee";
                     document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "CV"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Aircraft Carrier - ${fleet.keyCV}`
                     cvX.push(i)
                     cvY.push(y)
                 }
@@ -529,6 +530,7 @@
                 for (let i = parseInt(y);i < parseInt(y)+5;i++) {
                     document.getElementById(x + i.toString()).style.backgroundColor = "#ffeeee";
                     document.getElementById(x + i.toString()).innerHTML = "CV"
+                    document.getElementById(x + i.toString()).title = `Aircraft Carrier - ${fleet.keyCV}`
                     cvX.push(convert(x))
                     cvY.push(y)
                 }
@@ -539,25 +541,31 @@
             if (orientation == 0 && 10 - convert(x) >= 0) {
                 for (let i = convert(x);i < convert(x) + 4;i++) {
                     for (CVx in cvX) {
-                        if (CVx == i  && cvY[0] == y) {
-                            alert(`Already occupied.`)
-                            return;
+                        for (CVy in cvY) {
+                            if (!(CVy == i && CVx == i)) {
+                                alert(`Already occupied.`)
+                                return;
+                            }
                         }
                     }
                     document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#ff00ee";
                     document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "BB"
+                    document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Battleship - ${fleet.keyBB}`
                 }
             }
             else {
                 for (let i = parseInt(y);i < parseInt(y)+4;i++) {
                     for (CVy in cvY) {
-                        if (CVy == i) {
-                            alert(`Already occupied.`)
-                            return;
+                        for (CVx in cvX) {
+                            if (!(CVy == i && CVx == i)) {
+                                alert(`Already occupied.`)
+                                return;
+                            }
                         }
                     }
                     document.getElementById(x + i.toString()).style.backgroundColor = "#ff00ee";
                     document.getElementById(x + i.toString()).innerHTML = "BB"
+                    document.getElementById(x + i.toString()).title = `Battleship - ${fleet.keyBB}`
                 }
             }
             document.getElementById('keyBB').remove()
