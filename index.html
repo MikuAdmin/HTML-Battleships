@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="../style/board.css">
     <link rel="stylesheet" href="../style/index.css">
     <link rel="stylesheet" href="../style/display.css">
-    
-    <!--JQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <!--Scripts-->
+    <!--<script src="../script/select.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
     <!--Test Script-->
     <script>
         const ships = {
@@ -35,7 +36,7 @@
                 Royal: {
                     hermes: "HMS Hermes",
                     unicorn: "HMS Unicorn",
-                    chaser: "HMS Unicorn",
+                    chaser: "HMS Chaser",
                     ark_royal: "HMS Ark Royal",
                     illustrious: "HMS Illustrious",
                     victorious: "HMS Victorious"
@@ -422,7 +423,7 @@
             switch (value) {
                 case "cv":
                     document.getElementById('cv').disabled = true;
-                    document.getElementById("dis-cv").innerHTML = "Aircraft Carrier: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cv").innerHTML = "Aircraft Carrier: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-cv").style.borderRadius = '15px';
                     document.getElementById("dis-cv").style.backgroundColor = '#ffeeee';
                     var key = document.getElementById("ships").value;
@@ -431,7 +432,7 @@
                     break;
                 case "bb":
                     document.getElementById('bb').disabled = true;
-                    document.getElementById("dis-bb").innerHTML = "Battleship: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bb").innerHTML = "Battleship: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-bb").style.borderRadius = '15px';
                     document.getElementById("dis-bb").style.backgroundColor = '#000';
                     document.getElementById("dis-bb").style.color = "#FFF";
@@ -441,7 +442,7 @@
                     break;
                 case "bc":
                     document.getElementById('bc').disabled = true;
-                    document.getElementById("dis-bc").innerHTML = "Battlecruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-bc").innerHTML = "Battlecruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-bc").style.borderRadius = '15px';
                     document.getElementById("dis-bc").style.backgroundColor = '#3C3C3C';
                     document.getElementById("dis-bc").style.color = "#FFF";
@@ -451,7 +452,7 @@
                     break;
                 case "ca":
                     document.getElementById('ca').disabled = true;
-                    document.getElementById("dis-ca").innerHTML = "Heavy Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ca").innerHTML = "Heavy Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-ca").style.borderRadius = '15px';
                     document.getElementById("dis-ca").style.backgroundColor = 'azure';
                     var key = document.getElementById("ships").value;
@@ -460,7 +461,7 @@
                     break;
                 case "ss":
                     document.getElementById('ss').disabled = true;
-                    document.getElementById("dis-ss").innerHTML = "Submarine: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-ss").innerHTML = "Submarine: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-ss").style.borderRadius = '15px';
                     document.getElementById("dis-ss").style.backgroundColor = '#FF99AA';
                     var key = document.getElementById("ships").value;
@@ -469,7 +470,7 @@
                     break;
                 case "cl":
                     document.getElementById('cl').disabled = true;
-                    document.getElementById("dis-cl").innerHTML = "Light Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-cl").innerHTML = "Light Cruiser: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-cl").style.borderRadius = '15px';
                     document.getElementById("dis-cl").style.backgroundColor = '#00009A';
                     document.getElementById("dis-cl").style.color = "#FFF";
@@ -482,7 +483,7 @@
                     var value = document.getElementById(document.getElementById("ships").value).innerHTML
                     fleet.keyDD = value
                     document.getElementById('dd').disabled = true;
-                    document.getElementById("dis-dd").innerHTML = "Destroyer: " + document.getElementById(document.getElementById("ships").value).innerHTML;
+                    document.getElementById("dis-dd").innerHTML = "Destroyer: " + document.getElementById(document.getElementById("ships").value).innerHTML + "  &cross;";
                     document.getElementById("dis-dd").style.borderRadius = '15px';
                     document.getElementById("dis-dd").style.backgroundColor = '#EEEEFF';
                     if(document.getElementById("types").selectedIndex == -1) {
@@ -536,6 +537,9 @@
                 case 'keySS':
                     setSS(x, y, orientation);
                     break;
+                case 'keyDD':
+                    setDD(x, y, orientation);
+                    break;
             }
         }
 
@@ -555,6 +559,7 @@
                     document.getElementById(x + i.toString()).title = `Aircraft Carrier - ${fleet.keyCV} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-cv').innerHTML  = document.getElementById('dis-cv').innerHTML.substr(0, document.getElementById('dis-cv').innerHTML.length - 1) + "  " + "&check;";
         }
 
         function setBB(x, y, orientation) {
@@ -574,6 +579,7 @@
                     document.getElementById(x + i.toString()).title = `Battleship - ${fleet.keyBB} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-bb').innerHTML  = document.getElementById('dis-bb').innerHTML.substr(0, document.getElementById('dis-bb').innerHTML.length - 1) + "  " + "&check;";
             document.getElementById('keyBB').remove()
         }
 
@@ -594,6 +600,7 @@
                     document.getElementById(x + i.toString()).title = `Battlecruiser - ${fleet.keyBC} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-bc').innerHTML  = document.getElementById('dis-bc').innerHTML.substr(0, document.getElementById('dis-bc').innerHTML.length - 1) + "  " + "&check;";
             document.getElementById('keyBC').remove()
         }
 
@@ -613,6 +620,7 @@
                     document.getElementById(x + i.toString()).title = `Heavy Cruiser - ${fleet.keyCA} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-ca').innerHTML  = document.getElementById('dis-ca').innerHTML.substr(0, document.getElementById('dis-ca').innerHTML.length - 1) + "  " + "&check;";
         }
 
         function setCL(x, y, orientation) {
@@ -627,11 +635,12 @@
             else {
                 for (let i = parseInt(y);i < parseInt(y)+3;i++) {
                     document.getElementById(x + i.toString()).style.backgroundColor = "#00009A";
-                    document.getElementById(reverseConvert(i).toString() + y.toString()).style.color = "#fff"
+                    document.getElementById(x + i.toString()).style.color = "#FFFFFF"
                     document.getElementById(x + i.toString()).innerHTML = "CL"
                     document.getElementById(x + i.toString()).title = `Light Cruiser - ${fleet.keyCL} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-cl').innerHTML  = document.getElementById('dis-cl').innerHTML.substr(0, document.getElementById('dis-cl').innerHTML.length - 1) + "  " + "&check;";
             document.getElementById('keyCL').remove()
         }
 
@@ -650,26 +659,28 @@
                     document.getElementById(x + i.toString()).title = `Submarine - ${fleet.keySS} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-ss').innerHTML  = document.getElementById('dis-ss').innerHTML.substr(0, document.getElementById('dis-ss').innerHTML.length - 1) + "  " + "&check;";
             document.getElementById('keySS').remove()
         }
 
         function setDD(x, y, orientation) {
             if (orientation == 0 && 10 - convert(x) >= 0) {
-                for (let i = convert(x);i < convert(x) + 3;i++) {
+                for (let i = convert(x);i < convert(x) + 2;i++) {
                     document.getElementById(reverseConvert(i).toString() + y.toString()).style.backgroundColor = "#EEEEFF";
                     document.getElementById(reverseConvert(i).toString() + y.toString()).innerHTML = "DD"
                     document.getElementById(reverseConvert(i).toString() + y.toString()).title = `Destroyer - ${fleet.keyDD} | Cell: ${reverseConvert(i).toString().toUpperCase() + y.toString()}`
                 }
             }
             else {
-                for (let i = parseInt(y);i < parseInt(y)+3;i++) {
+                for (let i = parseInt(y);i < parseInt(y)+2;i++) {
                     document.getElementById(x + i.toString()).style.backgroundColor = "#EEEEFF";
                     document.getElementById(x + i.toString()).innerHTML = "DD"
                     document.getElementById(x + i.toString()).title = `Destroyer - ${fleet.keyDD} | Cell: ${x.toUpperCase()}${i.toString()}`
                 }
             }
+            document.getElementById('dis-dd').innerHTML  = document.getElementById('dis-dd').innerHTML.substr(0, document.getElementById('dis-dd').innerHTML.length - 1) + "  " + "&check;";
             document.getElementById('keyDD').remove()
-            document.getElementById("shp").remove()
+            document.getElementById("pos").remove()
         }
 
         /**
@@ -727,6 +738,14 @@
                     return 'i'
                 case 10:
                     return 'j'
+            }
+        }
+
+        class Ship {
+            constructor(name, coordinates, orientation) {
+                this.name = name;
+                this.coordinates = coordinates;
+                this.orientation = orientation;
             }
         }
     </script>
@@ -879,19 +898,19 @@
             </tr>
         </table>
         <div class="display">
-            <span id="dis-cv">&lt;Aircraft Carrier&gt;</span>
+            <span id="dis-cv">&lt;Aircraft Carrier&gt;  &cross;</span>
             <br />
-            <span id="dis-bb">&lt;Battleship&gt;</span>
+            <span id="dis-bb">&lt;Battleship&gt;  &cross;</span>
             <br />
-            <span id="dis-bc">&lt;Battlecruiser&gt;</span>
+            <span id="dis-bc">&lt;Battlecruiser&gt;  &cross;</span>
             <br />
-            <span id="dis-ca">&lt;Heavy Cruiser&gt;</span>
+            <span id="dis-ca">&lt;Heavy Cruiser&gt;  &cross;</span>
             <br />
-            <span id="dis-cl">&lt;Light Cruiser&gt;</span>
+            <span id="dis-cl">&lt;Light Cruiser&gt;  &cross;</span>
             <br />
-            <span id="dis-ss">&lt;Submarine&gt;</span>
+            <span id="dis-ss">&lt;Submarine&gt;  &cross;</span>
             <br />
-            <span id="dis-dd">&lt;Destroyer&gt;</span>
+            <span id="dis-dd">&lt;Destroyer&gt;  &cross;</span>
 
             <div class="selector" id="selector">
                 <select name="types" disabled id="types" onchange="func(this.value);$('.ships').empty()">
@@ -916,7 +935,7 @@
                     
                 </select>
             </div>
-            <div id="pos">
+            <div id="pos" style="position: fixed">
                 <select name="orientation" id="orientation">
                     <option value="0">Horizontal</option>
                     <option value="1">Vertical</option>
